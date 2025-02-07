@@ -23,11 +23,15 @@ const ContactCard = ({ contacts }) => {
     } catch (error) {
       console.log(error);
     }
+  
   };
+  const sortedContacts = contacts.slice().sort((a, b) => 
+    a.name.localeCompare(b.name)
+  );
   return (
     <>
-      <div key={contacts.id} className="mt-4 flex flex-col gap-3">
-        {contacts.map((contact) => (
+      <div className="mt-4 flex flex-col gap-3">
+        {sortedContacts.map((contact) => (
           <div
             key={contact.id}
             className="bg-yellow flex items-center justify-between gap-4 rounded-lg p-4"
@@ -38,7 +42,7 @@ const ContactCard = ({ contacts }) => {
               <p className="text-sm">{contact.email}</p>
             </div>
             <div className="flex text-3xl">
-              <MdEdit onClick={()=>editContact(contact)} className="cursor-pointer" />
+              <MdEdit onClick={() => editContact(contact)} className="cursor-pointer" />
               <MdDelete
                 onClick={() => deleteContact(contact.id)}
                 className="text-purple cursor-pointer"
